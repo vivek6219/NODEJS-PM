@@ -4,11 +4,11 @@ const axios = require('axios');
 const path = require('path');
 const fs = require('fs');
 const tar = require('tar');
-// const { exec } = require('child_process');
 const { pipeline } = require('stream');
 const { promisify } = require('util');
 const streamPipeline = promisify(pipeline);
 
+require('dotenv').config();
 const app = express();
 
 // API URL
@@ -17,9 +17,9 @@ const api = "https://registry.npmjs.org/";
 // Path to package.json
 const packagePath = path.join(__dirname, 'package.json');
 
-// Set temp port
+// Set port from dotenv file ortemp port
+// const port = process.env.PORT || 5000;
 const port = 5000;
-
 // Middleware: log requests
 app.use((request, result, next) => {
     console.log(request.path, request.method);
@@ -80,7 +80,7 @@ function getPackageName() {
 
 async function setUpAPI(packageName, isDev) {
     try {
-        const url = `${api}${packageName}`;
+        const url = api + packageName;
         const res = await axios.get(url);
 
         if (res.status === 200) {
@@ -121,9 +121,9 @@ async function installPackages() {
                     const tarballUrl = res.data.versions[version].dist.tarball;
                     console.log(`Installing "${packageName}@${version}". Tarball URL: ${tarballUrl}`);
 
-                    await downloadAndExtract(tarballUrl, packageName);
+                    await downloadAndExtractTarball(tarballUrl, packageName);
                 } else {
-                    console.log(`Error: Could not find dist information for ${packageName}@${version}`);
+                    console.log("Error finding dist inforomation for: ", packageName, "@", version)
                 }
             } else {
                 console.log(`Error installing ${packageName}:`, res.status);
@@ -134,7 +134,8 @@ async function installPackages() {
     }
 }
 
-async function downloadAndExtract(tarballUrl, packageName) {
+//download and extract tarball from a tarball specific url that is available within the npm registry
+async function downloadAndExtractTarball(tarballUrl, packageName) {
     const nodeModulesPath = path.join(__dirname, 'node_modules', packageName);
 
     if (!fs.existsSync(path.join(__dirname, 'node_modules'))) {
