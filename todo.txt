@@ -1,0 +1,12 @@
+Done:
+    Can access api call from npm.js
+    have written endpoints to fetch
+    fixed BUG: need to send info thru console and then hit endpoint via curl or postman. 
+    Need to have info sent directly thru console without hitting curl or postman
+TODO:
+    need to now add the data to package.json and have it add and install
+    
+    need to add user input to add and install packages
+    need to add endpoints for add and install
+    need to write tests
+

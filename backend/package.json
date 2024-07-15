@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-pm",
+  "version": "1.0.0",
+  "main": "./npmFetch.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node npmFetch.js",
+    "dev": "nodemon npmFetch.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "nodemon": "^2.0.6"
+  },
+  "devDependencies": {}
+}
