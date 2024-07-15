@@ -118,6 +118,7 @@ async function installPackages() {
 
             if (res.status === 200) {
                 if (res.data.versions && res.data.versions[version] && res.data.versions[version].dist && res.data.versions[version].dist.tarball) {
+
                     const tarballUrl = res.data.versions[version].dist.tarball;
                     console.log(`Installing "${packageName}@${version}". Tarball URL: ${tarballUrl}`);
 
