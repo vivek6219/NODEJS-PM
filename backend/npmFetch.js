@@ -118,15 +118,7 @@ async function installPackages() {
 
             if (res.status === 200) {
                 if (res.data.versions && res.data.versions[version] && res.data.versions[version].dist && res.data.versions[version].dist.tarball) {
-                    const tError finding dist inforomation for:  dotenv @ ^ 16.4.5
-                    Error finding dist inforomation for:  nodemon @ ^ 2.0.6
-                    Installing "noop3@1000.0.0".Tarball URL: https://registry.npmjs.org/noop3/-/noop3-1000.0.0.tgz
-                    Error during tarball extraction: ENOTEMPTY: directory not empty, rename '/home/snow/github/nodeJS-PM/backend/node_modules/package' -> '/home/snow/github/nodeJS-PM/backend/node_modules/noop3'
-                    Error finding dist inforomation for:  tar @ ^ 7.4.0
-                    Installing "is-thirteen@2.0.0".Tarball URL: https://registry.npmjs.org/is-thirteen/-/is-thirteen-2.0.0.tgz
-                    Package "is-thirteen" installed successfully.
-                    [nodemon] restarting due to changes...
-                    [nodemon] starting `node npmFetch.js`arballUrl = res.data.versions[version].dist.tarball;
+                    const tarballUrl = res.data.versions[version].dist.tarball;
                     console.log(`Installing "${packageName}@${version}". Tarball URL: ${tarballUrl}`);
 
                     await downloadAndExtractTarball(tarballUrl, packageName);
