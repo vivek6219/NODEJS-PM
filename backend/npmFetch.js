@@ -18,8 +18,8 @@ const api = "https://registry.npmjs.org/";
 const packagePath = path.join(__dirname, 'package.json');
 
 // Set port from dotenv file ortemp port
-// const port = process.env.PORT || 5000;
-const port = 5000;
+const port = process.env.PORT || 5000;
+// const port = 5000;
 // Middleware: log requests
 app.use((request, result, next) => {
     console.log(request.path, request.method);
