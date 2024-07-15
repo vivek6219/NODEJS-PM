@@ -85,10 +85,10 @@ async function setUpAPI(packageName, isDev) {
 
         if (res.status === 200) {
             const latestVersion = res.data['dist-tags'].latest;
-            if (res.data.versions && res.data.versions[latestVersion] && res.data.versions[latestVersion].dist) {
+            if (res.data.versions && res.data.versions[latestVersion] && res.data.versions[latestVersion].dist && res.data.versions[latestVersion].dist.tarball) {
+
                 const tarballUrl = res.data.versions[latestVersion].dist.tarball;
                 console.log(`Package "${packageName}" found. Version: ${latestVersion}. Tarball URL: ${tarballUrl}`);
-
                 // await downloadAndExtract(tarballUrl, packageName);
                 updatePackageJson(packageName, latestVersion, isDev);
             } else {
@@ -117,7 +117,7 @@ async function installPackages() {
             const res = await axios.get(url);
 
             if (res.status === 200) {
-                if (res.data.versions && res.data.versions[version] && res.data.versions[version].dist) {
+                if (res.data.versions && res.data.versions[version] && res.data.versions[version].dist && res.data.versions[version].dist.tarball) {
                     const tarballUrl = res.data.versions[version].dist.tarball;
                     console.log(`Installing "${packageName}@${version}". Tarball URL: ${tarballUrl}`);
 
